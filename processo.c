@@ -67,11 +67,57 @@ int main(int argc, char *argv[])
         printf("2 - Remover processo da pilha\n");
         printf("3 - Listar todos os processos\n");
         printf("4 - Consultar processo\n");
-        printf("5 - Colocar Supermercado em prioridade\n");
+        printf("5 - Colocar Supermercado na prioridade\n");
         printf("0 - Sair\n");
         scanf("%d",&opcao);
 
-        switch(opcao)
+ switch(opcao)
+        {
+        case 1:
+
+            printf("Digite o valor \n");
+            scanf("%f",&Valor);
+            printf("Nome: \n");
+            scanf("%s", Nome);
+            printf("Identidade: \n");
+            scanf("%s", Identidade);
+            printf("Digite o endereço \n");
+            scanf("%s",Endereco);
+            printf("Digite o telefone \n");
+            scanf("%s",Telefone);
+            printf("Digite o nome do supermercado \n");
+            scanf("%s", Nomesuper);
+            cont= 000000000 + ( rand() % 99999999 );
+            Empilha (&no , Nome, Identidade, Endereco, Telefone, Valor, Nomesuper, cont);
+            if(tamanho > 1)
+            {
+                Ordena(&no , tamanho);
+            }
+            printf("O processo foi colocado na pilha!\n\n\n");
+            break;
+        case 2:
+            DesEmpilha(&no);
+            //RemoveMeio(&no, 3);
+            printf("O primeiro processo foi retirado da pilha!\n\n\n");
+            break;
+        case 3:
+            ImprimePilha(&no);
+            break;
+        case 4:
+            printf("Qual o processo que deseja buscar na pilha?\n");
+            scanf("%d",&busca);
+            ConsultaElemento(&no,busca);
+            break;
+        case 5:
+            printf("Qual o mercado deseja colocar como prioridade?\n");
+            scanf("%s",Nomesuper);
+            Prioridade(&no, tamanho,Nomesuper);
+            break;
+        }
+    }
+
+    getchar();
+    return 0; switch(opcao)
         {
         case 1:
 
