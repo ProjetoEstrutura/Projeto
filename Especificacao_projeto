@@ -1,3 +1,5 @@
+Especificação:
+
 Imagine que você trabalhe em um setor jurídico de uma rede de supermercados. Simplificadamente, o seu serviço é resolver processos que serão passados pelo seu chefe para você. Estes processos tratam de cheques de clientes que voltaram do banco, isto é, tratam de clientes que deram cheque sem fundo para pagar alguma compra em um dos supermercados da grande rede.
 Seu chefe ao te passar um serviço te dá as informações referentes ao processo. NO caso as informações são: nome, endereço, identidade e telefone do cliente; valor e data do cheque; e o nome do supermercado que o cliente passou o cheque. Além disso cada processo deve possuir um identificador único.
 Os processos são organizados em uma pilha. Você executa sempre o serviço que está no topo da pilha. Só que esta pilha não é uma pilha comum, ela tem prioridade relacionada ao valor do cheque. O processo que estiver relacionado ao valor de cheque mais alto fica no topo da pilha, e o que estiver relacionado ao valor mais baixo fica na base da pilha.
