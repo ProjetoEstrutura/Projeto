@@ -163,8 +163,8 @@ int main(int argc, char *argv[])
     }
 
     getchar();
-    return 0;
-}
+// tirei q tava dando erro    return 0;
+
 
 
 int VerificapilhaVazia (pilha F)
