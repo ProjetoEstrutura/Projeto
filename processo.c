@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 			case 2:
 				DesEmpilha(&no);
 				//RemoveMeio(&no, 3);
-				printf("O primeiro processo foi retirado da pilha!\n\n\n");
+				printf("O processo do topo foi retirado da pilha!\n\n\n");
 			break;
 			case 3:
 				ImprimePilha(&no);
@@ -121,53 +121,7 @@ int main(int argc, char *argv[])
     getchar();
     
     return 0; 
-    
-    /*switch(opcao)
-        {
-        case 1:
-
-            printf("Digite o valor \n");
-            scanf("%f",&Valor);
-            printf("Nome: \n");
-            scanf("%s", Nome);
-            printf("Identidade: \n");
-            scanf("%s", Identidade);
-            printf("Digite o endereço \n");
-            scanf("%s",Endereco);
-            printf("Digite o telefone \n");
-            scanf("%s",Telefone);
-            printf("Digite o nome do supermercado \n");
-            scanf("%s", Nomesuper);
-            cont= 000000000 + ( rand() % 99999999 );
-            Empilha (&no , Nome, Identidade, Endereco, Telefone, Valor, Data, Nomesuper, cont);
-            if(tamanho > 1)
-            {
-                Ordena(&no , tamanho);
-            }
-            printf("O processo foi colocado na pilha!\n\n\n");
-            break;
-        case 2:
-            DesEmpilha(&no);
-            //RemoveMeio(&no, 3);
-            printf("O primeiro processo foi retirado da pilha!\n\n\n");
-            break;
-        case 3:
-            ImprimePilha(&no);
-            break;
-        case 4:
-            printf("Qual o processo que deseja buscar na pilha?\n");
-            scanf("%d",&busca);
-            ConsultaElemento(&no,busca);
-            break;
-        case 5:
-            printf("Qual o mercado deseja colocar como prioridade?\n");
-            scanf("%s",Nomesuper);
-            Prioridade(&no, tamanho,Nomesuper);
-            break;
-        }
-        
-        getchar();
-        return 0;*/
+   
 }
 
 
@@ -246,10 +200,12 @@ int DesEmpilha (pilha *F)
     free(remov->nome);
     free(remov->endereco);
     free(remov->telefone);
+    free(remov->data);
     free(remov->nomesuper);
     free(remov->identidade);
     free(remov);
     tamanho--;
+    
     return 1;
 }
 
@@ -425,7 +381,7 @@ int Ordena(pilha *F ,int tamanho)
 
 int Prioridade(pilha *F, int tamanho, char *nomesuper)
 {
-    int aux_valor, i=0, j, b=0, c;
+    int aux_valor, i=0, j, b=0 /*, c*/;
     int Identificador[tamanho], aux_identificador;
     float Valor[tamanho];
     char *nome[tamanho], *aux_nome, *Identidade[tamanho], *aux_identidade, *Endereco[tamanho], *aux_endereco, *Telefone[tamanho], 
