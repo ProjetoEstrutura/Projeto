@@ -269,7 +269,8 @@ int ConsultaElemento(pilha *F, int processo)
         printf("Endereço: %s\n", p->endereco);
         printf("Telefone: %s\n", p->telefone);
         printf("Nome do Supermercado: %s\n", p->nomesuper);
-        printf("Valor do Cheque %f\n", p->valor);
+        printf("Valor do Cheque: %f\n", p->valor);
+        printf("Data do Cheque: %s\n", p->data);
         printf("Identificador: %d\n", p->identificador);
         printf("-------------------------------------------");
         printf("\n\n");
