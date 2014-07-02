@@ -12,6 +12,7 @@ typedef struct elemento_pilha
     char *endereco;
     char *telefone;
     float valor;
+    char *data;
     char *nomesuper;
     int identificador;
     struct elemento_pilha* prox; //estrutura que define os processos da pilha
@@ -27,7 +28,7 @@ int tamanho=0;
 
 int VerificapilhaVazia (pilha F);
 void Criapilha(pilha *F);
-int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telefone, float Valor, char *Nomesuper, int cont);
+int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telefone, float Valor, char *Data, char *Nomesuper, int cont);
 int DesEmpilha (pilha *F);
 int RemoveFim (pilha *F);
 int ImprimePilha(pilha *F);
@@ -41,12 +42,12 @@ int RemoveFim (pilha *F);
 int main(int argc, char *argv[])
 {
     pilha no;
-    pilha *b;
+    //pilha *b;
     int cont;
     int opcao=1;
     int busca;
     float Valor;
-    char *Nome, *Identidade, *Endereco, *Telefone, *Nomesuper;
+    char *Nome, *Identidade, *Endereco, *Telefone, *Nomesuper, *Data;
     Criapilha(&no);
 
     Nome = (char*) malloc(20*sizeof(char));
@@ -54,8 +55,9 @@ int main(int argc, char *argv[])
     Endereco = (char*) malloc(100*sizeof(char));
     Telefone = (char*) malloc(9*sizeof(char));
     Nomesuper = (char*) malloc(20*sizeof(char));
+    Data = (char*) malloc(10*sizeof(char));
 
-    srand(time(NULL));
+    //srand(time(NULL));
 
     while(opcao != 0)
     {
@@ -71,7 +73,56 @@ int main(int argc, char *argv[])
         printf("0 - Sair\n");
         scanf("%d",&opcao);
 
- switch(opcao)
+		switch(opcao) {
+			case 1:
+				printf("Digite o valor \n");
+				scanf("%f",&Valor);
+				printf("Digite a data (formato DD/MM/AAAA) \n");
+				scanf("%s", Data); //adição do campo data do cheque que também é solicitado na especificação
+				printf("Nome: \n");
+				scanf("%s", Nome);
+				printf("Identidade: \n");
+				scanf("%s", Identidade);
+				printf("Digite o endereço \n");
+				scanf("%s",Endereco);
+				printf("Digite o telefone \n");
+				scanf("%s",Telefone);
+				printf("Digite o nome do supermercado \n");
+				scanf("%s", Nomesuper);
+				cont= 000000000 + ( rand() % 99999999 );
+				Empilha (&no , Nome, Identidade, Endereco, Telefone, Valor, Data, Nomesuper, cont);
+				if(tamanho > 1)
+				{
+					Ordena(&no , tamanho);
+				}
+				printf("O processo foi colocado na pilha!\n\n\n");
+			break;
+			case 2:
+				DesEmpilha(&no);
+				//RemoveMeio(&no, 3);
+				printf("O primeiro processo foi retirado da pilha!\n\n\n");
+			break;
+			case 3:
+				ImprimePilha(&no);
+            break;
+			case 4:
+				printf("Qual o processo que deseja buscar na pilha?\n");
+				scanf("%d",&busca);
+				ConsultaElemento(&no,busca);
+            break;
+			case 5:
+				printf("Qual o mercado deseja colocar como prioridade?\n");
+				scanf("%s",Nomesuper);
+				Prioridade(&no, tamanho,Nomesuper);
+			break;
+        }
+    }
+
+    getchar();
+    
+    return 0; 
+    
+    /*switch(opcao)
         {
         case 1:
 
@@ -88,7 +139,7 @@ int main(int argc, char *argv[])
             printf("Digite o nome do supermercado \n");
             scanf("%s", Nomesuper);
             cont= 000000000 + ( rand() % 99999999 );
-            Empilha (&no , Nome, Identidade, Endereco, Telefone, Valor, Nomesuper, cont);
+            Empilha (&no , Nome, Identidade, Endereco, Telefone, Valor, Data, Nomesuper, cont);
             if(tamanho > 1)
             {
                 Ordena(&no , tamanho);
@@ -114,57 +165,10 @@ int main(int argc, char *argv[])
             Prioridade(&no, tamanho,Nomesuper);
             break;
         }
-    }
-
-    getchar();
-    return 0; switch(opcao)
-        {
-        case 1:
-
-            printf("Digite o valor \n");
-            scanf("%f",&Valor);
-            printf("Nome: \n");
-            scanf("%s", Nome);
-            printf("Identidade: \n");
-            scanf("%s", Identidade);
-            printf("Digite o endereço \n");
-            scanf("%s",Endereco);
-            printf("Digite o telefone \n");
-            scanf("%s",Telefone);
-            printf("Digite o nome do supermercado \n");
-            scanf("%s", Nomesuper);
-            cont= 000000000 + ( rand() % 99999999 );
-            Empilha (&no , Nome, Identidade, Endereco, Telefone, Valor, Nomesuper, cont);
-            if(tamanho > 1)
-            {
-                Ordena(&no , tamanho);
-            }
-            printf("O processo foi colocado na pilha!\n\n\n");
-            break;
-        case 2:
-            DesEmpilha(&no);
-            //RemoveMeio(&no, 3);
-            printf("O primeiro processo foi retirado da pilha!\n\n\n");
-            break;
-        case 3:
-            ImprimePilha(&no);
-            break;
-        case 4:
-            printf("Qual o processo que deseja buscar na pilha?\n");
-            scanf("%d",&busca);
-            ConsultaElemento(&no,busca);
-            break;
-        case 5:
-            printf("Qual o mercado deseja colocar como prioridade?\n");
-            scanf("%s",Nomesuper);
-            Prioridade(&no, tamanho,Nomesuper);
-            break;
-        }
-    }
-
-    getchar();
-// tirei q tava dando erro    return 0;
-
+        
+        getchar();
+        return 0;*/
+}
 
 
 int VerificapilhaVazia (pilha F)
@@ -183,11 +187,10 @@ void Criapilha(pilha *F)
 {
     F->final=NULL;
     F->inicio=F->final;
-
 }
 
 //Insere Processo
-int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telefone, float Valor, char *Nomesuper, int cont)
+int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telefone, float Valor, char *Data, char *Nomesuper, int cont)
 {
     telemento_pilha *novo;
     novo = (telemento_pilha*) malloc(sizeof(telemento_pilha));
@@ -227,7 +230,6 @@ int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telef
 }
 
 //Remove Processo
-
 int DesEmpilha (pilha *F)
 {
     telemento_pilha *remov;
@@ -253,7 +255,6 @@ int DesEmpilha (pilha *F)
 
 
 //Imprime lista dos processos
-
 int ImprimePilha(pilha *F)
 {
     telemento_pilha *p;
@@ -281,7 +282,6 @@ int ImprimePilha(pilha *F)
 }
 
 //Procura o processo na lista através da chave de registro do mesmo
-
 int ConsultaElemento(pilha *F, int processo)
 {
     int encontrado;
@@ -328,16 +328,17 @@ int Ordena(pilha *F ,int tamanho)
     int aux_valor, i=0, j;
     int Identificador[tamanho], aux_identificador;
     float Valor[tamanho];
-    char *nome[tamanho], *aux_nome, *Identidade[tamanho], *aux_identidade, *Endereco[tamanho], *aux_endereco, *Telefone[tamanho], *aux_telefone, *Nomesuper[tamanho], *aux_nomesuper;
+    char *nome[tamanho], *aux_nome, *Identidade[tamanho], *aux_identidade, *Endereco[tamanho], *aux_endereco, *Telefone[tamanho], 
+    *aux_telefone, *Data[tamanho], *aux_data, *Nomesuper[tamanho], *aux_nomesuper;
     telemento_pilha *p;
     p=F->inicio;
 
-if (VerificapilhaVazia(*F) || tamanho == 1)
+	if (VerificapilhaVazia(*F) || tamanho == 1)
     {
         return 0;
     }
 
-//copiando lista para o vetor
+	//copiando lista para o vetor
     while(p!=NULL)
     {
 
@@ -345,11 +346,13 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
         nome[i] = (char*) malloc(20*sizeof(char));
         Endereco[i] = (char*) malloc(100*sizeof(char));
         Telefone[i] = (char*) malloc(9*sizeof(char));
+        Data[i] = (char*) malloc(10*sizeof(char));
         Nomesuper[i] = (char*) malloc(20*sizeof(char));
         aux_identidade = (char*) malloc(10*sizeof(char));
         aux_nome = (char*) malloc(20*sizeof(char));
         aux_endereco = (char*) malloc(100*sizeof(char));
         aux_telefone = (char*) malloc(9*sizeof(char));
+        aux_data = (char*) malloc(10*sizeof(char));
         aux_nomesuper = (char*) malloc(20*sizeof(char));
 
         strcpy(nome[i],p->nome);
@@ -357,6 +360,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
         strcpy(Endereco[i],p->endereco);
         strcpy(Telefone[i],p->telefone);
         Valor[i]=p->valor;
+        strcpy(Data[i],p->data);
         strcpy(Nomesuper[i],p->nomesuper);
         Identificador[i]=p->identificador;
         DesEmpilha(F);
@@ -378,6 +382,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
                 strcpy(aux_endereco,Endereco[i]);
                 strcpy(aux_telefone,Telefone[i]);
                 aux_valor=Valor[i];
+                strcpy(aux_data,Data[i]);
                 strcpy(aux_nomesuper,Nomesuper[i]);
                 aux_identificador=Identificador[i];
 
@@ -387,6 +392,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
                 strcpy(Endereco[i],Endereco[i+1]);
                 strcpy(Telefone[i],Telefone[i+1]);
                 Valor[i]=Valor[i+1];
+                strcpy(Data[i],Data[i+1]);
                 strcpy(Nomesuper[i],Nomesuper[i+1]);
                 Identificador[i]=Identificador[i+1];
 
@@ -395,6 +401,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
                 strcpy(Endereco[i+1],aux_endereco);
                 strcpy(Telefone[i+1],aux_telefone);
                 Valor[i+1]=aux_valor;
+                strcpy(Data[i+1],aux_data);
                 strcpy(Nomesuper[i+1],aux_nomesuper);
                 Identificador[i+1]=aux_identificador;
             }
@@ -403,16 +410,17 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
     //reEmpilhando
     for(i=0; i<tamanho; i++)
     {
-        Empilha (F, nome[i], Identidade[i], Endereco[i], Telefone[i], Valor[i], Nomesuper[i], Identificador[i]);
+        Empilha (F, nome[i], Identidade[i], Endereco[i], Telefone[i], Valor[i], Data [i], Nomesuper[i], Identificador[i]);
     }
 
     free(aux_nome);
     free(aux_identidade);
     free(aux_endereco);
     free(aux_telefone);
+    free(aux_data);
     free(aux_nomesuper);
 
-return 0;
+	return 0;
 }
 
 int Prioridade(pilha *F, int tamanho, char *nomesuper)
@@ -420,17 +428,18 @@ int Prioridade(pilha *F, int tamanho, char *nomesuper)
     int aux_valor, i=0, j, b=0, c;
     int Identificador[tamanho], aux_identificador;
     float Valor[tamanho];
-    char *nome[tamanho], *aux_nome, *Identidade[tamanho], *aux_identidade, *Endereco[tamanho], *aux_endereco, *Telefone[tamanho], *aux_telefone, *Nomesuper[tamanho], *aux_nomesuper;
+    char *nome[tamanho], *aux_nome, *Identidade[tamanho], *aux_identidade, *Endereco[tamanho], *aux_endereco, *Telefone[tamanho], 
+    *aux_telefone, *Data[tamanho], *aux_data, *Nomesuper[tamanho], *aux_nomesuper;
     telemento_pilha *p;
     p=F->inicio;
 
-if (VerificapilhaVazia(*F) || tamanho == 1)
+	if (VerificapilhaVazia(*F) || tamanho == 1)
     {
         return 0;
     }
 
 
-//copiando lista para o vetor
+	//copiando lista para o vetor
     while(p!=NULL)
     {
 
@@ -438,11 +447,13 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
         nome[i] = (char*) malloc(20*sizeof(char));
         Endereco[i] = (char*) malloc(100*sizeof(char));
         Telefone[i] = (char*) malloc(9*sizeof(char));
+        Data[i] = (char*) malloc(10*sizeof(char));
         Nomesuper[i] = (char*) malloc(20*sizeof(char));
         aux_identidade = (char*) malloc(10*sizeof(char));
         aux_nome = (char*) malloc(20*sizeof(char));
         aux_endereco = (char*) malloc(100*sizeof(char));
         aux_telefone = (char*) malloc(9*sizeof(char));
+        aux_data = (char*) malloc(10*sizeof(char));
         aux_nomesuper = (char*) malloc(20*sizeof(char));
 
         strcpy(nome[i],p->nome);
@@ -450,6 +461,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
         strcpy(Endereco[i],p->endereco);
         strcpy(Telefone[i],p->telefone);
         Valor[i]=p->valor;
+        strcpy(Data[i],p->data);
         strcpy(Nomesuper[i],p->nomesuper);
         Identificador[i]=p->identificador;
         DesEmpilha(F);
@@ -472,6 +484,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
                 strcpy(aux_endereco,Endereco[i]);
                 strcpy(aux_telefone,Telefone[i]);
                 aux_valor=Valor[i];
+                strcpy(aux_data,Data[i]);
                 strcpy(aux_nomesuper,Nomesuper[i]);
                 aux_identificador=Identificador[i];
 
@@ -481,6 +494,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
                 strcpy(Endereco[i],Endereco[i+1]);
                 strcpy(Telefone[i],Telefone[i+1]);
                 Valor[i]=Valor[i+1];
+                strcpy(Data[i],Data[i+1]);
                 strcpy(Nomesuper[i],Nomesuper[i+1]);
                 Identificador[i]=Identificador[i+1];
 
@@ -489,6 +503,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
                 strcpy(Endereco[i+1],aux_endereco);
                 strcpy(Telefone[i+1],aux_telefone);
                 Valor[i+1]=aux_valor;
+                strcpy(Data[i+1],aux_data);
                 strcpy(Nomesuper[i+1],aux_nomesuper);
                 Identificador[i+1]=aux_identificador;
             }
@@ -508,6 +523,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
                 strcpy(aux_endereco,Endereco[i]);
                 strcpy(aux_telefone,Telefone[i]);
                 aux_valor=Valor[i];
+                strcpy(aux_data,Data[i]);
                 strcpy(aux_nomesuper,Nomesuper[i]);
                 aux_identificador=Identificador[i];
 
@@ -517,6 +533,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
                 strcpy(Endereco[i],Endereco[i+1]);
                 strcpy(Telefone[i],Telefone[i+1]);
                 Valor[i]=Valor[i+1];
+                strcpy(Data[i],Data[i+1]);
                 strcpy(Nomesuper[i],Nomesuper[i+1]);
                 Identificador[i]=Identificador[i+1];
 
@@ -525,6 +542,7 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
                 strcpy(Endereco[i+1],aux_endereco);
                 strcpy(Telefone[i+1],aux_telefone);
                 Valor[i+1]=aux_valor;
+                strcpy(Data[i+1],aux_data);
                 strcpy(Nomesuper[i+1],aux_nomesuper);
                 Identificador[i+1]=aux_identificador;
             }
@@ -534,14 +552,15 @@ if (VerificapilhaVazia(*F) || tamanho == 1)
     //reEmpilhando
     for(i=0; i<tamanho; i++)
     {
-        Empilha (F, nome[i], Identidade[i], Endereco[i], Telefone[i], Valor[i], Nomesuper[i], Identificador[i]);
+        Empilha (F, nome[i], Identidade[i], Endereco[i], Telefone[i], Valor[i], Data[i],Nomesuper[i], Identificador[i]);
     }
 
     free(aux_nome);
     free(aux_identidade);
     free(aux_endereco);
     free(aux_telefone);
+    free(aux_data);
     free(aux_nomesuper);
 
-return 0;
+	return 0;
 }
