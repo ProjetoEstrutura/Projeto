@@ -30,13 +30,12 @@ int VerificaPilhaVazia (pilha F);
 void Criapilha(pilha *F);
 int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telefone, float Valor, char *Data, char *Nomesuper, int cont);
 int DesEmpilha (pilha *F);
-int RemoveFim (pilha *F);
+//int RemoveFim (pilha *F);
 int ImprimePilha(pilha *F);
 int ConsultaElemento(pilha *F, int processo);
 int Ordena(pilha *F ,int tamanho);
 int Prioridade(pilha *F, int tamanho, char *nomesuper);
-int RemoveMeio (pilha *F, int pos);
-int RemoveFim (pilha *F);
+//int RemoveMeio (pilha *F, int pos);
 
 //Verifica se a pilha de processos está vazia
 int main(int argc, char *argv[])
@@ -193,10 +192,7 @@ int DesEmpilha (pilha *F)
     {
         return 0;
     }
-    /*if (F->inicio == F->final)
-    {
-        F->final = NULL;
-    }*/
+
     remov = F->inicio;
     F->inicio = F->inicio->prox;
     free(remov->nome);
