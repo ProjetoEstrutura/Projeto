@@ -26,7 +26,7 @@ typedef struct pilha
 
 int tamanho=0;
 
-int VerificapilhaVazia (pilha F);
+int VerificaPilhaVazia (pilha F);
 void Criapilha(pilha *F);
 int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telefone, float Valor, char *Data, char *Nomesuper, int cont);
 int DesEmpilha (pilha *F);
@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
 }
 
 
-int VerificapilhaVazia (pilha F)
+int VerificaPilhaVazia (pilha F)
 {
     if(F.inicio == NULL && F.final == NULL)
     {
@@ -153,6 +153,7 @@ int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telef
     novo->identidade = (char*) malloc(10*sizeof(char));
     novo->endereco = (char*) malloc(100*sizeof(char));
     novo->telefone = (char*) malloc(9*sizeof(char));
+    novo->data = (char*) malloc(10*sizeof(char));
     novo->nomesuper = (char*) malloc(20*sizeof(char));
 
     if (novo == NULL)
@@ -164,11 +165,12 @@ int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telef
     strcpy(novo->identidade, Identidade);
     strcpy(novo->endereco, Endereco);
     strcpy(novo->telefone, Telefone);
+    strcpy(novo->data, Data);
     strcpy(novo->nomesuper, Nomesuper);
     novo->valor = Valor;
     novo->identificador = cont;
 
-    if (VerificapilhaVazia(*F))
+    if (VerificaPilhaVazia(*F))
     {
         F->inicio = novo;
         F->final =  novo;
@@ -187,7 +189,7 @@ int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telef
 int DesEmpilha (pilha *F)
 {
     telemento_pilha *remov;
-    if (VerificapilhaVazia(*F))
+    if (VerificaPilhaVazia(*F))
     {
         return 0;
     }
@@ -215,7 +217,7 @@ int ImprimePilha(pilha *F)
 {
     telemento_pilha *p;
     p=F->inicio;
-    if (VerificapilhaVazia(*F))
+    if (VerificaPilhaVazia(*F))
     {
         printf ("A pilha está vazia!\n\n\n");
         return 0;
@@ -228,7 +230,8 @@ int ImprimePilha(pilha *F)
         printf("Endereço: %s\n", p->endereco);
         printf("Telefone: %s\n", p->telefone);
         printf("Nome do Supermercado: %s\n", p->nomesuper);
-        printf("Valor do Cheque %f\n", p->valor);
+        printf("Valor do Cheque: %f\n", p->valor);
+        printf("Data do Cheque: %s\n", p->data);
         printf("Identificador: %d\n", p->identificador);
         printf("-------------------------------------------");
         printf("\n\n");
@@ -243,7 +246,7 @@ int ConsultaElemento(pilha *F, int processo)
     int encontrado;
     telemento_pilha *p;
     p=F->inicio;
-    if (VerificapilhaVazia(*F))
+    if (VerificaPilhaVazia(*F))
     {
         printf ("O processo %d não está na pilha e a pilha está vazia\n",processo);
         return 0;
@@ -289,7 +292,7 @@ int Ordena(pilha *F ,int tamanho)
     telemento_pilha *p;
     p=F->inicio;
 
-	if (VerificapilhaVazia(*F) || tamanho == 1)
+	if (VerificaPilhaVazia(*F) || tamanho == 1)
     {
         return 0;
     }
@@ -389,7 +392,7 @@ int Prioridade(pilha *F, int tamanho, char *nomesuper)
     telemento_pilha *p;
     p=F->inicio;
 
-	if (VerificapilhaVazia(*F) || tamanho == 1)
+	if (VerificaPilhaVazia(*F) || tamanho == 1)
     {
         return 0;
     }
