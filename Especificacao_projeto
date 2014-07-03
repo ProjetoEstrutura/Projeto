@@ -1,4 +1,5 @@
 ===================================================================
+
 Especificação:
 
 Imagine que você trabalhe em um setor jurídico de uma rede de supermercados.
@@ -10,8 +11,8 @@ Os processos são organizados em uma pilha. Você executa sempre o serviço que 
 
 Caso algum dos supermercados esteja precisando muito de dinheiro, seu chefe entrará em contato com você e te avisará este fato. Neste caso você terá que rearrumar a pilha colocando todos os processos que estão relacionados ao super-mercado com problema no topo, e os outros continuarão na ordem anterior.
 
-Além disso, caso o seu chefe considere algum processo muito importante, ele poderá te pedir para resolvê-lo, mas estar tentando resolvê-lo também sem você saber. Neste caso se ele resolver o caso antes de você, ele entrará em contato com você e te avisará para ignorar tal processo. 
-Você então terá que retirar tal processo da pilha, estando ele onde estiver.
+*****Além disso, caso o seu chefe considere algum processo muito importante, ele poderá te pedir para resolvê-lo, mas estar tentando resolvê-lo também sem você saber. Neste caso se ele resolver o caso antes de você, ele entrará em contato com você e te avisará para ignorar tal processo. 
+Você então terá que retirar tal processo da pilha, estando ele onde estiver.***** AINDA NÃO FOI FEITO
 
 Você deve ser capaz de responder quais identificadores dos processos, quais os nomes dos clientes, e quais os valores dos cheques que estão na pilha, e ainda, qual identificador do processo, qual o nome do cliente, qual o valor do cheque do processo do topo.
 
