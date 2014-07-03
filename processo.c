@@ -579,4 +579,5 @@ int ExibeBase(pilha *F)
 	printf("\n\n");
     
     return 1;
+    
 }
