@@ -35,6 +35,7 @@ int ImprimePilha(pilha *F);
 int ConsultaElemento(pilha *F, int processo);
 int Ordena(pilha *F ,int tamanho);
 int Prioridade(pilha *F, int tamanho, char *nomesuper);
+int ExibeTopo (pilha *F);
 //int RemoveMeio (pilha *F, int pos);
 
 //Verifica se a pilha de processos está vazia
@@ -65,10 +66,11 @@ int main(int argc, char *argv[])
 
         printf("==================== pilha ====================\n");
         printf("1 - Inserir processo na pilha\n");
-        printf("2 - Remover processo da pilha\n");
+        printf("2 - Executar processo da pilha\n");
         printf("3 - Listar todos os processos\n");
         printf("4 - Consultar processo\n");
         printf("5 - Colocar Supermercado na prioridade\n");
+        printf("6 - Mostrar cheque do topo da pilha\n");
         printf("0 - Sair\n");
         scanf("%d",&opcao);
 
@@ -113,6 +115,9 @@ int main(int argc, char *argv[])
 				printf("Qual o mercado deseja colocar como prioridade?\n");
 				scanf("%s",Nomesuper);
 				Prioridade(&no, tamanho,Nomesuper);
+			break;
+			case 6:
+				ExibeTopo(&no);
 			break;
         }
     }
@@ -519,4 +524,29 @@ int Prioridade(pilha *F, int tamanho, char *nomesuper)
     free(aux_nomesuper);
 
 	return 0;
+}
+
+int ExibeTopo(pilha *F)
+{
+    telemento_pilha *p;
+    p=F->inicio;
+    if (VerificaPilhaVazia(*F))
+    {
+        printf ("A pilha está vazia!\n\n\n");
+        return 0;
+    }
+    
+	printf("-------------------------------------------\n");
+	printf("Nome: %s\n", p->nome);
+    printf("Identidade: %s\n", p->identidade);
+    printf("Endereço: %s\n", p->endereco);
+	printf("Telefone: %s\n", p->telefone);
+	printf("Nome do Supermercado: %s\n", p->nomesuper);
+	printf("Valor do Cheque: %f\n", p->valor);
+	printf("Data do Cheque: %s\n", p->data);
+	printf("Identificador: %d\n", p->identificador);
+	printf("-------------------------------------------");
+	printf("\n\n");
+    
+    return 1;
 }
