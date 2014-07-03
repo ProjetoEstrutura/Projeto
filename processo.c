@@ -36,6 +36,7 @@ int ConsultaElemento(pilha *F, int processo);
 int Ordena(pilha *F ,int tamanho);
 int Prioridade(pilha *F, int tamanho, char *nomesuper);
 int ExibeTopo (pilha *F);
+int ExibeBase (pilha *F);
 //int RemoveMeio (pilha *F, int pos);
 
 //Verifica se a pilha de processos está vazia
@@ -70,7 +71,8 @@ int main(int argc, char *argv[])
         printf("3 - Listar todos os processos\n");
         printf("4 - Consultar processo\n");
         printf("5 - Colocar Supermercado na prioridade\n");
-        printf("6 - Mostrar cheque do topo da pilha\n");
+        printf("6 - Mostrar processo do topo da pilha\n");
+        printf("7 - Mostrar processo da base da pilha\n");
         printf("0 - Sair\n");
         scanf("%d",&opcao);
 
@@ -118,6 +120,9 @@ int main(int argc, char *argv[])
 			break;
 			case 6:
 				ExibeTopo(&no);
+			break;
+			case 7:
+				ExibeBase(&no);
 			break;
         }
     }
@@ -530,6 +535,31 @@ int ExibeTopo(pilha *F)
 {
     telemento_pilha *p;
     p=F->inicio;
+    if (VerificaPilhaVazia(*F))
+    {
+        printf ("A pilha está vazia!\n\n\n");
+        return 0;
+    }
+    
+	printf("-------------------------------------------\n");
+	printf("Nome: %s\n", p->nome);
+    printf("Identidade: %s\n", p->identidade);
+    printf("Endereço: %s\n", p->endereco);
+	printf("Telefone: %s\n", p->telefone);
+	printf("Nome do Supermercado: %s\n", p->nomesuper);
+	printf("Valor do Cheque: %f\n", p->valor);
+	printf("Data do Cheque: %s\n", p->data);
+	printf("Identificador: %d\n", p->identificador);
+	printf("-------------------------------------------");
+	printf("\n\n");
+    
+    return 1;
+}
+
+int ExibeBase(pilha *F)
+{
+    telemento_pilha *p;
+    p=F->final;
     if (VerificaPilhaVazia(*F))
     {
         printf ("A pilha está vazia!\n\n\n");
