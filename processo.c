@@ -157,11 +157,10 @@ void Criapilha(pilha *F)
 int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telefone, float Valor, char *Data, char *Nomesuper, int cont)
 {
 	float tempo;
-	time_t t_inicio,t_fim;
-	int i,j;
+	clock_t t_inicio,t_fim;
     telemento_pilha *novo;
     
-    t_inicio = time(NULL); //pega o tempo de início de execução da função
+    t_inicio = clock(); //pega o tempo de início de execução da função
     
     novo = (telemento_pilha*) malloc(sizeof(telemento_pilha));
 
@@ -197,9 +196,9 @@ int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telef
         novo->prox = F->inicio;
         F->inicio = novo;
     }
-    t_fim = time(NULL); //pega o tempo fim da função
+    t_fim = clock(); //pega o tempo fim da função
     
-    tempo = difftime(t_fim,t_inicio); //função para calcular o tempo total gasto na função
+    tempo = ((t_fim - t_inicio) / (CLOCKS_PER_SEC / 1000));  //função para calcular o tempo total gasto na função
     printf("Tempo gasto para empilhar: %f\n",tempo);
     
     tamanho++;
