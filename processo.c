@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h> //biblioteca para a análise do tempo das funções
 
 
 //Declaração da Struct
@@ -155,7 +156,13 @@ void Criapilha(pilha *F)
 //Insere Processo
 int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telefone, float Valor, char *Data, char *Nomesuper, int cont)
 {
+	float tempo;
+	time_t t_inicio,t_fim;
+	int i,j;
     telemento_pilha *novo;
+    
+    t_inicio = time(NULL); //pega o tempo de início de execução da função
+    
     novo = (telemento_pilha*) malloc(sizeof(telemento_pilha));
 
     novo->nome = (char*) malloc(20*sizeof(char));
@@ -190,7 +197,13 @@ int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telef
         novo->prox = F->inicio;
         F->inicio = novo;
     }
+    t_fim = time(NULL); //pega o tempo fim da função
+    
+    tempo = difftime(t_fim,t_inicio); //função para calcular o tempo total gasto na função
+    printf("Tempo gasto para empilhar: %f\n",tempo);
+    
     tamanho++;
+    
     return 1;
 }
 
