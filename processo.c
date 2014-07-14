@@ -38,6 +38,7 @@ int Ordena(pilha *F ,int tamanho);
 int Prioridade(pilha *F, int tamanho, char *nomesuper);
 int ExibeTopo (pilha *F);
 int ExibeBase (pilha *F);
+int RemoveProcessoID (pilha *F,int processo);
 //int RemoveMeio (pilha *F, int pos);
 
 //Verifica se a pilha de processos está vazia
@@ -45,12 +46,14 @@ int main(int argc, char *argv[])
 {
     pilha no;
     //pilha *b;
-    int cont;
+    int cont,i;
     int opcao=1;
     int busca;
     float Valor;
     char *Nome, *Identidade, *Endereco, *Telefone, *Nomesuper, *Data;
     Criapilha(&no);
+	float tempo;
+	time_t t_inicio,t_fim;
 
     Nome = (char*) malloc(20*sizeof(char));
     Identidade = (char*) malloc(10*sizeof(char));
@@ -74,6 +77,8 @@ int main(int argc, char *argv[])
         printf("5 - Colocar Supermercado na prioridade\n");
         printf("6 - Mostrar processo do topo da pilha\n");
         printf("7 - Mostrar processo da base da pilha\n");
+        /*printf("8 - Retirar processo já atendido\n");*/
+        printf("9 - Popular a pilha\n");
         printf("0 - Sair\n");
         scanf("%d",&opcao);
 
@@ -125,6 +130,38 @@ int main(int argc, char *argv[])
 			case 7:
 				ExibeBase(&no);
 			break;
+			/*case 8:
+				printf("Informe o ID do processo que deve ser retirado: \n");
+				scanf("%d",&busca);
+				RemoveProcessoID(&no,busca);
+			break;*/
+			case 9:
+				t_inicio = time(NULL); //pega o tempo de início de execução da função
+				for (i=0; i<1500; i++){
+					Valor = 000000000 + ( rand() % 99999999 );
+					Data = "dd/mm/aaaa";
+					Nome = "Aaa";
+					Identidade = "bbb";
+					Endereco = "ccc";
+					Telefone = "ddd";
+					Nomesuper = "eee";
+					cont= 000000000 + ( rand() % 99999999 );
+					Empilha (&no , Nome, Identidade, Endereco, Telefone, Valor, Data, Nomesuper, cont);
+				
+					if(tamanho > 1)
+					{
+						Ordena(&no , tamanho);
+					}
+					
+					i++;
+				}
+				printf("A pilha foi populada\n\n\n");
+				
+				t_fim = time(NULL); //pega o tempo fim da função
+    
+				tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
+				printf("Tempo gasto para empilhar: %f\n",tempo);
+			break;
         }
     }
 
@@ -156,11 +193,7 @@ void Criapilha(pilha *F)
 //Insere Processo
 int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telefone, float Valor, char *Data, char *Nomesuper, int cont)
 {
-	float tempo;
-	clock_t t_inicio,t_fim;
     telemento_pilha *novo;
-    
-    t_inicio = clock(); //pega o tempo de início de execução da função
     
     novo = (telemento_pilha*) malloc(sizeof(telemento_pilha));
 
@@ -196,10 +229,6 @@ int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telef
         novo->prox = F->inicio;
         F->inicio = novo;
     }
-    t_fim = clock(); //pega o tempo fim da função
-    
-    tempo = ((t_fim - t_inicio) / (CLOCKS_PER_SEC / 1000));  //função para calcular o tempo total gasto na função
-    printf("Tempo gasto para empilhar: %f\n",tempo);
     
     tamanho++;
     
@@ -593,3 +622,17 @@ int ExibeBase(pilha *F)
     return 1;
     
 }
+
+/*int RemoveProcessoID (pilha *F, int processo){
+	int encontrado = 0;
+    telemento_pilha *p;
+    p = F->inicio;
+    
+    encontrado = ConsultaElemento(&p,processo);
+    
+    if (encontrado == 0){
+		printf("Não há processo na fila com o número informado");
+		
+		return 0;
+	}
+}*/
