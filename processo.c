@@ -370,7 +370,7 @@ int ConsultaElemento(pilha *F, int processo)
         printf("O processo não está na pilha\n");
         
         t_fim = time(NULL); //pega o tempo fim da função
-		tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
+		tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto
 		printf("Tempo gasto para consultar: %f\n",tempo);
         
         return 0;
