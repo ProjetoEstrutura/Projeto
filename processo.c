@@ -308,20 +308,33 @@ int ImprimePilha(pilha *F)
         printf("\n\n");
         p=p->prox;
     }
+    
     return 1;
 }
 
 //Procura o processo na lista através da chave de registro do mesmo
 int ConsultaElemento(pilha *F, int processo)
 {
+	float tempo;
+	time_t t_inicio,t_fim;
+	
+	t_inicio = time(NULL); //pega o tempo de início de execução da função
+	
     int encontrado;
     telemento_pilha *p;
     p=F->inicio;
+    
     if (VerificaPilhaVazia(*F))
     {
         printf ("O processo %d não está na pilha e a pilha está vazia\n",processo);
+        
+        t_fim = time(NULL); //pega o tempo fim da função
+		tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
+		printf("Tempo gasto para consultar: %f\n",tempo);
+		
         return 0;
     }
+    
     while(p!=NULL)
     {
         if (p->identificador == processo)
@@ -345,13 +358,24 @@ int ConsultaElemento(pilha *F, int processo)
         printf("Identificador: %d\n", p->identificador);
         printf("-------------------------------------------");
         printf("\n\n");
+        
+        t_fim = time(NULL); //pega o tempo fim da função
+		tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
+		printf("Tempo gasto para consultar: %f\n",tempo);
+		
         return 1;
     }
     else
     {
         printf("O processo não está na pilha\n");
+        
+        t_fim = time(NULL); //pega o tempo fim da função
+		tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
+		printf("Tempo gasto para consultar: %f\n",tempo);
+        
         return 0;
     }
+    
 }
 
 int Ordena(pilha *F ,int tamanho)
