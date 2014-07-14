@@ -39,6 +39,7 @@ int Prioridade(pilha *F, int tamanho, char *nomesuper);
 int ExibeTopo (pilha *F);
 int ExibeBase (pilha *F);
 int RemoveProcessoID (pilha *F,int processo);
+int DesempilharTudo(pilha *F);
 //int RemoveMeio (pilha *F, int pos);
 
 //Verifica se a pilha de processos está vazia
@@ -79,6 +80,7 @@ int main(int argc, char *argv[])
         printf("7 - Mostrar processo da base da pilha\n");
         /*printf("8 - Retirar processo já atendido\n");*/
         printf("9 - Popular a pilha\n");
+        printf("10 - Esvaziar a pilha\n");
         printf("0 - Sair\n");
         scanf("%d",&opcao);
 
@@ -161,6 +163,28 @@ int main(int argc, char *argv[])
     
 				tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
 				printf("Tempo gasto para empilhar: %f\n",tempo);
+			break;
+			case 10:
+				/*t_inicio = time(NULL); //pega o tempo de início de execução da função
+				telemento_pilha *p;
+				p = no->inicio;
+				
+				if (VerificaPilhaVazia(no)){
+					printf ("A pilha está vazia!\n\n\n");
+				}
+			
+				while(p!=NULL){
+					DesEmpilha(p);
+					no=no->prox;
+				}
+				
+				t_fim = time(NULL); //pega o tempo fim da função
+    
+				tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
+	
+				printf("Tempo gasto para empilhar: %f\n",tempo);*/
+				
+				DesempilharTudo(&no);
 			break;
         }
     }
@@ -636,3 +660,31 @@ int ExibeBase(pilha *F)
 		return 0;
 	}
 }*/
+
+int DesempilharTudo(pilha *F)
+{
+	float tempo;
+	time_t t_inicio,t_fim;
+	t_inicio = time(NULL); //pega o tempo de início de execução da função
+	telemento_pilha *p;
+	p=F->inicio;
+				
+	if (VerificaPilhaVazia(*F)){
+		printf ("A pilha está vazia!\n\n\n");
+		return 0;
+	}
+			
+	while(p!=NULL)
+    {
+        DesEmpilha(F);
+        p=p->prox;
+    }
+				
+	t_fim = time(NULL); //pega o tempo fim da função
+    
+	tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
+	
+	printf("Tempo gasto para desempilhar: %f\n",tempo);
+	
+	return 1;
+}
