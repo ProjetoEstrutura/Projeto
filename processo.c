@@ -42,11 +42,9 @@ int RemoveProcessoID (pilha *F,int processo);
 int DesempilharTudo(pilha *F);
 //int RemoveMeio (pilha *F, int pos);
 
-//Verifica se a pilha de processos está vazia
 int main(int argc, char *argv[])
 {
     pilha no;
-    //pilha *b;
     int cont,i;
     int opcao=1;
     int busca;
@@ -62,8 +60,6 @@ int main(int argc, char *argv[])
     Telefone = (char*) malloc(9*sizeof(char));
     Nomesuper = (char*) malloc(20*sizeof(char));
     Data = (char*) malloc(10*sizeof(char));
-
-    //srand(time(NULL));
 
     while(opcao != 0)
     {
@@ -110,7 +106,6 @@ int main(int argc, char *argv[])
 			break;
 			case 2:
 				DesEmpilha(&no);
-				//RemoveMeio(&no, 3);
 				printf("O processo do topo foi retirado da pilha!\n\n\n");
 			break;
 			case 3:
@@ -165,25 +160,6 @@ int main(int argc, char *argv[])
 				printf("Tempo gasto para empilhar: %f\n",tempo);
 			break;
 			case 10:
-				/*t_inicio = time(NULL); //pega o tempo de início de execução da função
-				telemento_pilha *p;
-				p = no->inicio;
-				
-				if (VerificaPilhaVazia(no)){
-					printf ("A pilha está vazia!\n\n\n");
-				}
-			
-				while(p!=NULL){
-					DesEmpilha(p);
-					no=no->prox;
-				}
-				
-				t_fim = time(NULL); //pega o tempo fim da função
-    
-				tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
-	
-				printf("Tempo gasto para empilhar: %f\n",tempo);*/
-				
 				DesempilharTudo(&no);
 			break;
         }
