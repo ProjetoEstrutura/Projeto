@@ -159,10 +159,6 @@ int main(int argc, char *argv[])
 
 				tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
 				printf("Tempo gasto para empilhar: %f\n",tempo);
-<<<<<<< HEAD
-			break;
-			case 10:
-=======
 			}break;
 			case 10:{/*
 				t_inicio = time(NULL); //pega o tempo de início de execução da função
