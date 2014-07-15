@@ -160,29 +160,9 @@ int main(int argc, char *argv[])
 				tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
 				printf("Tempo gasto para empilhar: %f\n",tempo);
 			}break;
-			case 10:{/*
-				t_inicio = time(NULL); //pega o tempo de início de execução da função
-				telemento_pilha *p;
-				p = no->inicio;
-
-				if (VerificaPilhaVazia(no)){
-					printf ("A pilha está vazia!\n\n\n");
-				}
-
-				while(p!=NULL){
-					DesEmpilha(p);
-					no=no->prox;
-				}
-
-				t_fim = time(NULL); //pega o tempo fim da função
-
-				tempo = difftime(t_fim,t_inicio);  //função para calcular o tempo total gasto na função
-
-				printf("Tempo gasto para empilhar: %f\n",tempo);
-
->>>>>>> origin/master
+			case 10:{
 				DesempilharTudo(&no);
-			*/}break;
+			}break;
         }
     }
 
