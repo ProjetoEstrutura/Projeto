@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h> //biblioteca para a análise do tempo das funções
+#include <time.h> //biblioteca para a análise do tempo das funções1
 
 
 //Declaração da Struct
 typedef struct elemento_pilha
 {
-    //int dado;
     char *nome;
     char *identidade;
     char *endereco;
@@ -30,17 +29,16 @@ int tamanho=0;
 int VerificaPilhaVazia (pilha F);
 void Criapilha(pilha *F);
 int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telefone, float Valor, char *Data, char *Nomesuper, int cont);
-int DesEmpilha (pilha *F);
-//int RemoveFim (pilha *F);
+telemento_pilha *DesEmpilha (pilha *F);
 int ImprimePilha(pilha *F);
 int ConsultaElemento(pilha *F, int processo);
 int Ordena(pilha *F ,int tamanho);
 int Prioridade(pilha *F, int tamanho, char *nomesuper);
 int ExibeTopo (pilha *F);
 int ExibeBase (pilha *F);
-int RemoveProcessoID (pilha *F,int processo);
 int DesempilharTudo(pilha *F);
-//int RemoveMeio (pilha *F, int pos);
+int meio(pilha *F, int processo);
+void Free (telemento_pilha *p);
 
 int main(int argc, char *argv[])
 {
@@ -48,6 +46,7 @@ int main(int argc, char *argv[])
     int cont,i;
     int opcao=1;
     int busca;
+    int processo;
     float Valor;
     char *Nome, *Identidade, *Endereco, *Telefone, *Nomesuper, *Data;
     Criapilha(&no);
@@ -74,7 +73,7 @@ int main(int argc, char *argv[])
         printf("5 - Colocar Supermercado na prioridade\n");
         printf("6 - Mostrar processo do topo da pilha\n");
         printf("7 - Mostrar processo da base da pilha\n");
-        /*printf("8 - Retirar processo já atendido\n");*/
+        printf("8 - Retirar processo já atendido\n");
         printf("9 - Popular a pilha\n");
         printf("10 - Esvaziar a pilha\n");
         printf("0 - Sair\n");
@@ -106,7 +105,7 @@ int main(int argc, char *argv[])
 				printf("O processo foi colocado na pilha!\n\n\n");
 			}break;
 			case 2:{
-				DesEmpilha(&no);
+				Free(DesEmpilha(&no));
 				printf("O processo do topo foi retirado da pilha!\n\n\n");
 			}break;
 			case 3:{
@@ -128,14 +127,15 @@ int main(int argc, char *argv[])
 			case 7:{
 				ExibeBase(&no);
 			}break;
-			/*case 8:{
+			case 8:{
 				printf("Informe o ID do processo que deve ser retirado: \n");
-				scanf("%d",&busca);
-				RemoveProcessoID(&no,busca);
-			}break;*/
+				scanf("%d",&processo);
+				//RemoveProcessoID(&no,processo);
+				meio(&no,processo);
+			}break;
 			case 9:{
 				t_inicio = time(NULL); //pega o tempo de início de execução da função
-				for (i=0; i<2000; i++){
+				for (i=0; i<10; i++){
 					Valor = 000000000 + ( rand() % 99999999 );
 					Data = "dd/mm/aaaa";
 					Nome = "Aaa";
@@ -237,7 +237,7 @@ int Empilha (pilha *F, char *Nome, char *Identidade, char *Endereco, char *Telef
 }
 
 //Remove Processo
-int DesEmpilha (pilha *F)
+telemento_pilha *DesEmpilha (pilha *F)
 {
     telemento_pilha *remov;
     if (VerificaPilhaVazia(*F))
@@ -247,6 +247,14 @@ int DesEmpilha (pilha *F)
 
     remov = F->inicio;
     F->inicio = F->inicio->prox;
+    
+    tamanho--;
+
+    return remov;
+}
+
+ void Free (telemento_pilha *remov)
+{
     free(remov->nome);
     free(remov->endereco);
     free(remov->telefone);
@@ -254,9 +262,7 @@ int DesEmpilha (pilha *F)
     free(remov->nomesuper);
     free(remov->identidade);
     free(remov);
-    tamanho--;
 
-    return 1;
 }
 
 
@@ -402,7 +408,7 @@ int Ordena(pilha *F ,int tamanho)
         strcpy(Data[i],p->data);
         strcpy(Nomesuper[i],p->nomesuper);
         Identificador[i]=p->identificador;
-        DesEmpilha(F);
+        Free(DesEmpilha(F));
         i++;
         p=p->prox;
     }
@@ -464,7 +470,7 @@ int Ordena(pilha *F ,int tamanho)
 
 int Prioridade(pilha *F, int tamanho, char *nomesuper)
 {
-    int aux_valor, i=0, j, b=0 /*, c*/;
+    int aux_valor, i=0, j, b=0;
     int Identificador[tamanho], aux_identificador;
     float Valor[tamanho];
     char *nome[tamanho], *aux_nome, *Identidade[tamanho], *aux_identidade, *Endereco[tamanho], *aux_endereco, *Telefone[tamanho],
@@ -503,7 +509,7 @@ int Prioridade(pilha *F, int tamanho, char *nomesuper)
         strcpy(Data[i],p->data);
         strcpy(Nomesuper[i],p->nomesuper);
         Identificador[i]=p->identificador;
-        DesEmpilha(F);
+        Free(DesEmpilha(F));
         i++;
         p=p->prox;
     }
@@ -655,20 +661,6 @@ int ExibeBase(pilha *F)
 
 }
 
-/*int RemoveProcessoID (pilha *F, int processo){
-	int encontrado = 0;
-    telemento_pilha *p;
-    p = F->inicio;
-
-    encontrado = ConsultaElemento(&p,processo);
-
-    if (encontrado == 0){
-		printf("Não há processo na fila com o número informado");
-
-		return 0;
-	}
-}*/
-
 int DesempilharTudo(pilha *F)
 {
 	float tempo;
@@ -684,7 +676,7 @@ int DesempilharTudo(pilha *F)
 
 	while(p!=NULL)
     {
-        DesEmpilha(F);
+        Free(DesEmpilha(F));
         p=p->prox;
     }
 
@@ -695,4 +687,17 @@ int DesempilharTudo(pilha *F)
 	printf("Tempo gasto para desempilhar: %f\n",tempo);
 
 	return 1;
+}
+
+int meio(pilha *F, int processo){
+	telemento_pilha *p = F->inicio;
+	
+	DesEmpilha(F);
+	
+	if (p->identificador != processo) {
+		meio(F,processo);
+		Empilha(F, p->nome, p->identidade, p->endereco, p->telefone, p->valor, p->data, p->nomesuper, p->identificador);
+	}
+	
+	return 0;
 }
