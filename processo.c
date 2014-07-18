@@ -263,7 +263,6 @@ free(remov);
 tamanho--;
 }
 
-
 //Imprime lista dos processos
 int ImprimePilha(pilha *F)
 {
