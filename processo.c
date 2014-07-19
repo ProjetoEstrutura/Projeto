@@ -64,9 +64,9 @@ int main(int argc, char *argv[])
 		//system("clear"); //se for rodar no linux
 		//system("cls"); // se for rodar no windows
 
-		printf("==================== pilha ====================\n");
+		printf("==================== PROJETO ====================\n");
 		printf("1 - Inserir processo na pilha\n");
-		printf("2 - Executar processo da pilha\n");
+		printf("2 - Retirar processo da pilha\n");
 		printf("3 - Listar todos os processos\n");
 		printf("4 - Consultar processo\n");
 		printf("5 - Colocar Supermercado na prioridade\n");
@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
 			}break;
 			case 9:{
 				t_inicio = time(NULL); //pega o tempo de início de execução da função
-				for (i=0; i<10; i++){
+				for (i=0; i<4000; i++){
 					Valor = 000000000 + ( rand() % 99999999 );
 					Data = "dd/mm/aaaa";
 					Nome = "Aaa";
@@ -279,22 +279,12 @@ int ImprimePilha(pilha *F) {
 
 //Procura o processo na lista através da chave de registro do mesmo
 int ConsultaElemento(pilha *F, int processo){
-	float tempo;
-	time_t t_inicio,t_fim;
-
-	t_inicio = time(NULL); //pega o tempo de início de execução da função
-
 	int encontrado;
 	telemento_pilha *p;
 	p=F->inicio;
 
 	if (VerificaPilhaVazia(*F)){
 		printf ("O processo %d não está na pilha e a pilha está vazia\n",processo);
-
-		t_fim = time(NULL); //pega o tempo fim da função
-		tempo = difftime(t_fim,t_inicio); //função para calcular o tempo total gasto na função
-		printf("Tempo gasto para consultar: %f\n",tempo);
-
 		return 0;
 	}
 
@@ -319,18 +309,10 @@ int ConsultaElemento(pilha *F, int processo){
 		printf("-------------------------------------------");
 		printf("\n\n");
 
-		t_fim = time(NULL); //pega o tempo fim da função
-		tempo = difftime(t_fim,t_inicio); //função para calcular o tempo total gasto na função
-		printf("Tempo gasto para consultar: %f\n",tempo);
-
 		return 1;
 	}
 	else{
 		printf("O processo não está na pilha\n");
-
-		t_fim = time(NULL); //pega o tempo fim da função
-		tempo = difftime(t_fim,t_inicio); //função para calcular o tempo total gasto
-		printf("Tempo gasto para consultar: %f\n",tempo);
 		return 0;
 	}
 }
@@ -601,32 +583,32 @@ int ExibeBase(pilha *F){
 	return 1;
 }
 
-/*int DesempilharTudo(pilha *F)
-{
-float tempo;
-time_t t_inicio,t_fim;
-t_inicio = time(NULL); //pega o tempo de início de execução da função
-telemento_pilha *p;
-p=F->inicio;
+/*int DesempilharTudo(pilha *F){
+	float tempo;
+	time_t t_inicio,t_fim;
+	
+	t_inicio = time(NULL); //pega o tempo de início de execução da função
+	
+	telemento_pilha *p;
+	p=F->inicio;
+	
+	if (VerificaPilhaVazia(*F)){
+		printf ("A pilha está vazia!\n\n\n");
+		return 0;
+	}
 
-if (VerificaPilhaVazia(*F)){
-printf ("A pilha está vazia!\n\n\n");
-return 0;
-}
+	while(p!=NULL){
+		Free(DesEmpilha(F));
+		p=p->prox;
+	}
 
-while(p!=NULL)
-{
-Free(DesEmpilha(F));
-p=p->prox;
-}
+	t_fim = time(NULL); //pega o tempo fim da função
 
-t_fim = time(NULL); //pega o tempo fim da função
+	tempo = difftime(t_fim,t_inicio); //função para calcular o tempo total gasto na função
 
-tempo = difftime(t_fim,t_inicio); //função para calcular o tempo total gasto na função
+	printf("Tempo gasto para desempilhar: %f\n",tempo);
 
-printf("Tempo gasto para desempilhar: %f\n",tempo);
-
-return 1;
+	return 1;
 }*/
 
 int RemoveMeio(pilha *F, int processo){
