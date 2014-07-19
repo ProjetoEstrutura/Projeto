@@ -75,7 +75,11 @@ printf("6 - Mostrar processo do topo da pilha\n");
 printf("7 - Mostrar processo da base da pilha\n");
 printf("8 - Retirar processo já atendido\n");
 printf("9 - Popular a pilha\n");
+<<<<<<< HEAD
 /*printf("10 - Esvaziar a pilha\n");*/ //Função retirada pois estava dando erro
+=======
+printf("10 - Esvaziar a pilha\n");
+>>>>>>> origin/master
 printf("0 - Sair\n");
 scanf("%d",&opcao);
 
