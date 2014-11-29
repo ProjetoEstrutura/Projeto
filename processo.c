@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h> //biblioteca para a análise do tempo das funções1
 
-
+//teste
 //Declaração da Struct
 typedef struct elemento_pilha
 {
